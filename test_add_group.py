@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.common.action_chains import ActionChains
-import time, unittest
+import  unittest
 
 def is_alert_present(wd):
     try:
@@ -10,11 +9,12 @@ def is_alert_present(wd):
     except:
         return False
 
-class (unittest.TestCase):
+
+class Test(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
-    
+
     def test_(self):
         success = True
         wd = self.wd
@@ -49,7 +49,7 @@ class (unittest.TestCase):
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").send_keys("\\undefined")
         self.assertTrue(success)
-    
+
     def tearDown(self):
         self.wd.quit()
 
