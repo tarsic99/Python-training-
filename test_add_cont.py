@@ -18,13 +18,12 @@ class test_add_contact(unittest.TestCase):
         self.wd.implicitly_wait(60)
 
     def test_add_contact(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.add_new_contact(wd, Contact(first_name="Taras", last_name="Balyuk", mobile_phone="2244270997"))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.add_new_contact(Contact(first_name="Taras", last_name="Balyuk", mobile_phone="2244270997"))
+        self.logout()
 
-    def add_new_contact(self, wd, contact):
+    def add_new_contact(self, contact):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -37,10 +36,13 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("mobile").send_keys(contact.mobile_phone)
         wd.find_element_by_name("submit").click()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def login(self, wd, username, password):
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -51,8 +53,8 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
         # OR wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
-
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
     def tearDown(self):
