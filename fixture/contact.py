@@ -1,3 +1,5 @@
+import time
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -16,4 +18,10 @@ class ContactHelper:
         wd.find_element_by_name("mobile").clear()
         wd.find_element_by_name("mobile").send_keys(contact.mobile_phone)
         wd.find_element_by_name("submit").click()
+
+    def del_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_css_selector("input[value=\"Delete\"]").click()
+        wd.switch_to_alert().accept()
 
